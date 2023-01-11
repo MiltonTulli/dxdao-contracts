@@ -18,7 +18,9 @@ const {
   time,
 } = require("@openzeppelin/test-helpers");
 
-const ProxyAdmin = artifacts.require("ProxyAdmin.sol");
+const ProxyAdmin = artifacts.require(
+  "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol:ProxyAdmin"
+);
 const TransparentUpgradeableProxy = artifacts.require(
   "TransparentUpgradeableProxy.sol"
 );
@@ -1339,9 +1341,7 @@ contract("ERC20Guild", function (accounts) {
                 .setETHPermission(
                   erc20Guild.address,
                   testToken.address,
-                  web3.eth.abi.encodeFunctionSignature(
-                    "mint(address,uint256)"
-                  ),
+                  web3.eth.abi.encodeFunctionSignature("mint(address,uint256)"),
                   0,
                   true
                 )

@@ -14,6 +14,9 @@ contract("DAOAvatar", function (accounts) {
     );
   });
 
+
+  console.log('asd')
+
   it("Should revert call", async function () {
     const owner = accounts[0];
 

@@ -1,6 +1,6 @@
 {
   "name": "@dx-gov-test/dxdao-contracts",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "DXdao smart contracts",
   "files": [
     "contracts/",
@@ -26,7 +26,8 @@
     "lint --fix": "eslint --fix .",
     "format": "prettier --write \"test/**/*.{js,jsx,ts,tsx,json,md}\" \"contracts/**/*.sol\"",
     "format-check": "prettier --check \"test/**/*.{js,jsx,ts,tsx,json,md}\" \"contracts/**/*.sol\"",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "postinstall": "yarn compile"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",

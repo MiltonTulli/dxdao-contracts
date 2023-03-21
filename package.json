@@ -1,6 +1,6 @@
 {
-  "name": "dxdao-contracts",
-  "version": "1.0.0",
+  "name": "@dx-gov-test/dxdao-contracts",
+  "version": "2.0.2",
   "description": "DXdao smart contracts",
   "files": [
     "contracts/",
@@ -80,7 +80,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/augustol/arc.git"
+    "url": "https://github.com/DXgovernance/dxdao-contracts.git"
   },
   "engines": {
     "node": ">=10.16.3"
@@ -112,5 +112,16 @@
       "yarn format",
       "yarn solidity-linter"
     ]
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/dxgovernance/dxdao-contracts/issues"
+  },
+  "homepage": "https://github.com/DXgovernance/dxdao-contracts#readme",
+  "main": ".solcover.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "author": "DXDao Governance Team"
 }
+

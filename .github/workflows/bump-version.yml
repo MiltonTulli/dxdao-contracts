@@ -50,6 +50,11 @@ jobs:
 
     - name: Install npm packages
       run: yarn install
+      
+    - name: Setup Git
+      run: |
+        git config user.name 'Dxdao Governance Team'
+        git config user.email 'dxdaoGovernanceTeam@gmail.com'
 
     - name: bump version
       run: npm version ${{ github.event.inputs.version }}

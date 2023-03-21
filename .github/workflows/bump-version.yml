@@ -58,3 +58,53 @@ jobs:
 
     - name: Push latest version
       run: git push origin main --follow-tags
+      
+  create-tag:
+    name: Create new Tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract version from package.json
+        uses: sergeysova/jq-action@v2
+        id: version
+        with:
+          cmd: 'jq .version package.json -r'
+      
+      - name: Setup Git
+        run: |
+          git config user.name 'Dxdao Governance Team'
+          git config user.email 'dxdaoGovernanceTeam@gmail.com'
+
+      - name: Add new tag
+        run: git tag v${{ steps.version.outputs.value }}
+
+      - name: Push latest tag
+        run: git push origin v${{ steps.version.outputs.value }}
+        
+#   Todo: publish to npm
+
+#   publish-to-npm:
+#     name: Publish to npm
+#     runs-on: ubuntu-latest
+#     needs: bump-version
+#     permissions:
+#       id-token: write
+#     steps:
+#     - name: Checkout source
+#       uses: actions/checkout@v3
+      
+#     - name: Setup node
+#       uses: actions/setup-node@v3
+#       with:
+#         node-version: '16.13.0'
+#         registry-url: 'https://registry.npmjs.org'
+        
+# #     - name: Install latest npm version
+# #       run: npm install -g npm@latest
+
+#     - name: Install dependencies and build
+#       run: yarn install && yarn compile
+      
+#     - name: Publish package
+#       run: npm publish --access public --provenance
+#       env:
+#         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

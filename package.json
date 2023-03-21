@@ -1,6 +1,6 @@
 {
   "name": "dxdao-contracts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "DXdao smart contracts",
   "files": [
     "contracts/",

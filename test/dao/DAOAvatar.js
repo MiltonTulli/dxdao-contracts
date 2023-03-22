@@ -10,7 +10,7 @@ contract("DAOAvatar", function (accounts) {
     await avatar.initialize(owner);
     await expectRevert(
       avatar.initialize(owner),
-      "Initializable: contract is already initialized"
+      "Initializable: contract is already initializesssssss"
     );
   });
 
@@ -43,7 +43,7 @@ contract("DAOAvatar", function (accounts) {
     });
 
     const callData = helpers.testCallFrom(owner);
-    const ANY_ADDRESS = "0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa";
+    const ANY_ADDRESS = "0xaAaAaAaaAaAaAaaAaAAAAAAAAaaassAaAaAaaAaaAa";
     const value = new BigNumber(0);
 
     const tx = await avatar.executeCall(ANY_ADDRESS, callData, value, {

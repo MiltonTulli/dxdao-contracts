@@ -51,10 +51,11 @@ jobs:
       - name: bump version
         id: package-version
         # run: npm version ${{ github.event.inputs.version }} | read message | echo "NEXT_PACKAGE_VERSION=$message" >> $GITHUB_OUTPUT
-        run: echo "NEXT_PACKAGE_VERSION=`echo $(npm version ${{ github.event.inputs.version }})`" >> $GITHUB_OUTPUT
+        run: echo "NEXT_PACKAGE_VERSION=`echo $(npm version ${{ github.event.inputs.version }})`" >> $GITHUB_ENV
 
       - name: log new version
-        run: echo "Updated to version ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION  }}"
+        # run: echo "Updated to version ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION  }}"
+        run: echo "Updated to version ${{ env.NEXT_PACKAGE_VERSION  }}"
 
       - name: Push latest version & new tag
         run: git push origin main --follow-tags
@@ -98,8 +99,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Log tag to release from
+        run: echo "Using tag ${{ env.NEXT_PACKAGE_VERSION }}"
+
       - name: Create Release
-        run: gh release create ${{steps.package-version.outputs.NEXT_PACKAGE_VERSION }} --generate-notes --latest --verify-tag
+        run: gh release create ${{ env.NEXT_PACKAGE_VERSION }} --generate-notes --latest --verify-tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

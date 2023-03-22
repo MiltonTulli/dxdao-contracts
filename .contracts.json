@@ -8,7 +8,7 @@
     "permissionRegistry": "0x0000000000000000000000000000000000000000",
     "schemes": {},
     "utils": {
-      "multicall": "0x742121cD0BB9784c1f17f25B8da1bF3445b93ED4",
+      "multicall": "dddddd",
       "dxDaoNFT": "0x0000000000000000000000000000000000000000",
       "dxdVestingFactory": "0x0000000000000220000000000000000000000000",
       "create2Deployer": "0x60eb77a1d81cd80db4cdd589a7bbcd1f29a38ae8"

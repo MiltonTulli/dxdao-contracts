@@ -77,8 +77,8 @@ jobs:
       - name: Install latest npm version
         run: npm install -g npm@latest
 
-      - name: Install dependencies and build
-        run: yarn install && yarn compile
+      # - name: Install dependencies and build
+      #   run: yarn install && yarn compile
 
       - name: publish
         uses: JS-DevTools/npm-publish@v1

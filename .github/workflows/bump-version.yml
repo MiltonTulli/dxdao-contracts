@@ -35,13 +35,13 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16.13.0"
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: "16.13.0"
 
-      - name: Install npm packages
-        run: yarn install
+      # - name: Install npm packages
+      #   run: yarn install
 
       - name: Setup Git
         run: |
@@ -49,7 +49,8 @@ jobs:
           git config user.email 'dxdaoGovernanceTeam@gmail.com'
 
       - name: bump version
-        run: npm version ${{ github.event.inputs.version }}
+        id: package-version
+        run: npm version ${{ github.event.inputs.version }} | read next-version | echo "NEXT_PACKAGE_VERSION=$next-version" >> $GITHUB_OUTPUT
 
       - name: Push latest version
         run: git push origin main --follow-tags
@@ -62,16 +63,11 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v2
 
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v2
+      # - name: Extract version from package.json
+      #   uses: sergeysova/jq-action@v2
+      #   id: version
       #   with:
-      #     node-version: '16.13.0'
-
-      - name: Extract version from package.json
-        uses: sergeysova/jq-action@v2
-        id: version
-        with:
-          cmd: "jq .version package.json -r"
+      #     cmd: "jq .version package.json -r"
 
       - name: Setup Git
         run: |
@@ -79,10 +75,10 @@ jobs:
           git config user.email 'dxdaoGovernanceTeam@gmail.com'
 
       - name: Add new tag
-        run: git tag v${{ steps.version.outputs.value }}
+        run: git tag ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION  }}
 
       - name: Push latest tag
-        run: git push origin v${{ steps.version.outputs.value }}
+        run: git push origin v${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION }}
 #   Todo: publish to npm
 #   Todo: do release
 
@@ -112,4 +108,5 @@ jobs:
 #       run: npm publish --access public --provenance
 #       env:
 #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
 

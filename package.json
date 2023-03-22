@@ -1,6 +1,6 @@
 {
   "name": "@dx-gov-test/dxdao-contracts",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "DXdao smart contracts",
   "files": [
     "contracts/",
@@ -28,7 +28,7 @@
     "format": "prettier --write \"test/**/*.{js,jsx,ts,tsx,json,md}\" \"contracts/**/*.sol\"",
     "format-check": "prettier --check \"test/**/*.{js,jsx,ts,tsx,json,md}\" \"contracts/**/*.sol\"",
     "pre-commit": "lint-staged",
-    "prepublishOnly": "yarn compile"
+    "prepublishOnly": "echo \"replace with yarn compile\""
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",

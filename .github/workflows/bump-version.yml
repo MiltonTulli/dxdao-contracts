@@ -58,27 +58,6 @@ jobs:
       - name: Push latest version & new tag
         run: git push origin main --follow-tags
 
-  # create-tag:
-  #   name: Create new Tag
-  #   runs-on: ubuntu-latest
-  #   needs: bump-version
-  #   steps:
-  #     - name: Check out source
-  #       uses: actions/checkout@v2
-
-  #     - name: Setup Git
-  #       run: |
-  #         git config user.name 'Dxdao Governance Team'
-  #         git config user.email 'dxdaoGovernanceTeam@gmail.com'
-
-  #     - name: Add new tag
-  #       run: git tag ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION  }}
-
-  #     - name: Push latest tag
-  #       run: git pull origin main && git push origin ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION }}
-  #   Todo: publish to npm
-  #   Todo: do release
-
   publish-to-npm:
     name: Publish to npm
     runs-on: ubuntu-latest
@@ -105,4 +84,18 @@ jobs:
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
+
+  create-github-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: publish-to-npm
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Create Release
+        run: gh release create ${{ github.ref }} --generate-notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

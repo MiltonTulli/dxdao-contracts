@@ -50,7 +50,8 @@ jobs:
 
       - name: bump version
         id: package-version
-        run: npm version ${{ github.event.inputs.version }} | read message | echo "NEXT_PACKAGE_VERSION=$message" >> $GITHUB_OUTPUT
+        # run: npm version ${{ github.event.inputs.version }} | read message | echo "NEXT_PACKAGE_VERSION=$message" >> $GITHUB_OUTPUT
+        run: echo "NEXT_PACKAGE_VERSION=`echo $(npm version ${{ github.event.inputs.version }})`" >> $GITHUB_OUTPUT
 
       - name: log new version
         run: echo "Updated to version ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION  }}"
@@ -98,7 +99,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Create Release
-        run: gh release create ${{ github.ref }} --generate-notes
+        run: gh release create ${{steps.package-version.outputs.NEXT_PACKAGE_VERSION }} --generate-notes --latest --verify-tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

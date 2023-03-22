@@ -208,7 +208,7 @@ contract BaseERC20Guild {
     /// @param value The ETH value to be sent on each call to be executed
     /// @param totalOptions The amount of options that would be offered to the voters
     /// @param title The title of the proposal
-    /// @param contentHash The content hash of the content reference of the proposal for the proposal to be executed
+    /// @param contentHash The content hash of the content reference of the proposal for the proposal to be executed asdqwdqwdqwd123123
     function createProposal(
         address[] memory to,
         bytes[] memory data,

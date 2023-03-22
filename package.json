@@ -1,6 +1,6 @@
 {
   "name": "@dx-gov-test/dxdao-contracts",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "DXdao smart contracts",
   "files": [
     "contracts/",

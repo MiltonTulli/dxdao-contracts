@@ -76,8 +76,8 @@ jobs:
       - name: Install latest npm version
         run: npm install -g npm@latest
 
-      - name: Install dependencies and compile contracts
-        run: yarn install && yarn compile
+#       - name: Install dependencies and compile contracts
+#         run: yarn install && yarn compile
 
       - name: Publish npm package to npm registry
         uses: JS-DevTools/npm-publish@v1

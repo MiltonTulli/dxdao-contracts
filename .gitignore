@@ -29,3 +29,4 @@ contracts/hardhat-dependency-compiler
 types
 .turbo
 bytecodes
+dummy/

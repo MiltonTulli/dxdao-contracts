@@ -52,33 +52,30 @@ jobs:
         id: package-version
         run: npm version ${{ github.event.inputs.version }} | read message | echo "NEXT_PACKAGE_VERSION=$message" >> $GITHUB_OUTPUT
 
-      - name: Push latest version
+      - name: log new version
+        run: echo "Updated to version ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION  }}"
+
+      - name: Push latest version & new tag
         run: git push origin main --follow-tags
 
-  create-tag:
-    name: Create new Tag
-    runs-on: ubuntu-latest
-    needs: bump-version
-    steps:
-      - name: Check out source
-        uses: actions/checkout@v2
+  # create-tag:
+  #   name: Create new Tag
+  #   runs-on: ubuntu-latest
+  #   needs: bump-version
+  #   steps:
+  #     - name: Check out source
+  #       uses: actions/checkout@v2
 
-      # - name: Extract version from package.json
-      #   uses: sergeysova/jq-action@v2
-      #   id: version
-      #   with:
-      #     cmd: "jq .version package.json -r"
+  #     - name: Setup Git
+  #       run: |
+  #         git config user.name 'Dxdao Governance Team'
+  #         git config user.email 'dxdaoGovernanceTeam@gmail.com'
 
-      - name: Setup Git
-        run: |
-          git config user.name 'Dxdao Governance Team'
-          git config user.email 'dxdaoGovernanceTeam@gmail.com'
+  #     - name: Add new tag
+  #       run: git tag ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION  }}
 
-      - name: Add new tag
-        run: git tag ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION  }}
-
-      - name: Push latest tag
-        run: git push origin ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION }}
+  #     - name: Push latest tag
+  #       run: git pull origin main && git push origin ${{ steps.package-version.outputs.NEXT_PACKAGE_VERSION }}
 #   Todo: publish to npm
 #   Todo: do release
 

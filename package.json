@@ -29,7 +29,7 @@
     "format": "prettier --write \"test/**/*.{js,jsx,ts,tsx,json,md}\" \"contracts/**/*.sol\"",
     "format-check": "prettier --check \"test/**/*.{js,jsx,ts,tsx,json,md}\" \"contracts/**/*.sol\"",
     "pre-commit": "lint-staged",
-    "prepublishOnly": "echo \"do yarn compile\""
+    "prepublishOnly": "yarn compile"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
